@@ -42,8 +42,6 @@ class DESAdapter(HTTPAdapter):
         context = create_urllib3_context(ciphers=CIPHERS)
         kwargs['ssl_context'] = context
         return super(DESAdapter, self).init_poolmanager(*args, **kwargs)
-
-class CompareCheck:
 class apiTestRunnerUI():
 
     statusLabel = QLabel("Status : ")
@@ -198,168 +196,149 @@ class apiTestRunnerUI():
     class CompareCheck:
 
 class apiTestRunner():
-
-    var totalTests = 0
-    var totalErrors = 0
-    var totalSkipped = 0
-    var baseURL = ""
-    var logMessages = ""
-    var runUI = False
-    var responseFileText = ""
-    var testFileText = ""
-
-
     def send_get_request(baseURL,url):
-    global requestURL
+        global requestURL
 
-    start_time = time.time()
+        start_time = time.time()
 
-    requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+        requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-    requestURL = baseURL + url
+        requestURL = baseURL + url
 
-    try:
-        response = requests.get(url, verify=False)
+        try:
+            response = requests.get(url, verify=False)
 
-        # If the response was successful, no Exception will be raised
-        response.raise_for_status()
-    except HTTPError as http_err:
-        print(f'HTTP error occurred: {http_err}')  # Python 3.6
-    except Exception as err:
-        print(f'Other error occurred: {err}')  # Python 3.6
-    else:
-        print('Success!')
+            # If the response was successful, no Exception will be raised
+            response.raise_for_status()
+        except HTTPError as http_err:
+            print(f'HTTP error occurred: {http_err}')  # Python 3.6
+        except Exception as err:
+            print(f'Other error occurred: {err}')  # Python 3.6
+        else:
+            print('Success!')
 
-
-    return response.json()  # or response.text, o
+        return response.json()  # or response.text, o
 
     def send_api_request(url,body,source, acctID, account_no):
+        global baseURL
+        global requestURL
 
-    global baseURL
-    global requestURL
+        s = Session()
+        s.mount('https://', DESAdapter())
 
-    s = Session()
-    s.mount('https://', DESAdapter())
+        random_number = str(random.randint(1000, 9999))
+        requestID = "automated_tests" + random_number
 
-    random_number = str(random.randint(1000, 9999))
-    requestID = "automated_tests" + random_number
+        #print(url)
+        username = "user" 
+        password = "password!"
+        auth = HTTPBasicAuth(username, password)
+        start_time = time.time()
 
-    #print(url)
-    username = "user" 
-    password = "password!"
-    auth = HTTPBasicAuth(username, password)
-    start_time = time.time()
+        requestURL = baseURL + url
+        if (body == None):
+            response = requests.get(requestURL, auth=auth)
+        else:
+            response = requests.post(requestURL, auth=auth, json=body)
 
-    requestURL = baseURL + url
-    if (body == None):
-        response = requests.get(requestURL, auth=auth)
-    else:
-        response = requests.post(requestURL, auth=auth, json=body)
-    
-    executionTime = time.time() - start_time
-    
-    return response
+        executionTime = time.time() - start_time
+
+        return response
 
     def account_performance_test(json_data):
-    account_no = json_data.get('account_no')
-    acctID = json_data.get('acctID')    
-    start = json_data.get('start')  
-    end = json_data.get('end')
+        account_no = json_data.get('account_no')
+        acctID = json_data.get('acctID')    
+        start = json_data.get('start')  
+        end = json_data.get('end')
 
-    url = '/advisor-partners-app-svc/restservices/participant/account-performance/{}/{}/{}/{}/{}'.format(source, acctID,account_no,start,end)
-   
-    response = send_api_request(url,None,source, acctID, account_no)
+        url = '/advisor-partners-app-svc/restservices/participant/account-performance/{}/{}/{}/{}/{}'.format(source, acctID,account_no,start,end)
 
-    return response
+        response = send_api_request(url,None,source, acctID, account_no)
 
-    def  account_status_test(json_data):
+        return response
 
-    account_no = json_data.get('account_no')
-    acct_id = json_data.get('acctID')  # Renamed the variable to 'acct_id'
-    url = '/advisor-partners-app-svc/restservices/participant/account-status/{}/{}/{}'.format(source, acct_id, account_no)
+    def account_status_test(json_data):
+        account_no = json_data.get('account_no')
+        acct_id = json_data.get('acctID')  # Renamed the variable to 'acct_id'
+        url = '/advisor-partners-app-svc/restservices/participant/account-status/{}/{}/{}'.format(source, acct_id, account_no)
 
-    response = send_api_request(url, None, source, acct_id, account_no)
+        response = send_api_request(url, None, source, acct_id, account_no)
 
-    return response
+        return response
 
     def transaction_test(json_data):
+        account_no = json_data.get('account_no')
+        acctID = json_data.get('acctID')
+        requestID = json_data.get('requestID')
 
-    account_no = json_data.get('account_no')
-    acctID = json_data.get('acctID')
-    requestID = json_data.get('requestID')
-            
-    url = '/advisor-partners-app-svc/restservices/participant/transaction-status'
-    body = json_data.get('body')
+        url = '/advisor-partners-app-svc/restservices/participant/transaction-status'
+        body = json_data.get('body')
 
-    response = send_api_request(url,body,source, acctID, account_no)
+        response = send_api_request(url,body,source, acctID, account_no)
 
-    return response
+        return response
 
     def realignments_test(json_data):
+        account_no = json_data.get('account_no')
+        acctID = json_data.get('acctID')
 
-    account_no = json_data.get('account_no')
-    acctID = json_data.get('acctID')
+        url = '/advisor-partners-app-svc/restservices/participant/realignments/{}/{}/{}'.format(source, acctID,account_no)
+        body = json_data.get('body')
 
-    url = '/advisor-partners-app-svc/restservices/participant/realignments/{}/{}/{}'.format(source, acctID,account_no)
-    body = json_data.get('body')
+        response = send_api_request(url,body,source, acctID, account_no)
 
-    response = send_api_request(url,body,source, acctID, account_no)
-
-    return response
+        return response
 
     def future_allocation_test(json_data):
+        account_no = json_data.get('account_no')
+        acctID = json_data.get('acctID')
 
-    account_no = json_data.get('account_no')
-    acctID = json_data.get('acctID')
+        url = '/advisor-partners-app-svc/restservices/participant/future-allocation/{}/{}/{}'.format(source, acctID,account_no)
+        body = json_data.get('body')
 
-    url = '/advisor-partners-app-svc/restservices/participant/future-allocation/{}/{}/{}'.format(source, acctID,account_no)
-    body = json_data.get('body')
+        response = send_api_request(url,body,source, acctID, account_no)
 
-    response = send_api_request(url,body,source, acctID, account_no)
-
-    return response
+        return response
 
     def doc_list_test(json_data):
-    
-    body = json_data.get('body')
-    acctID = json_data.get('acctID')
-    account_no = json_data.get('account_no')
-    start = json_data.get('start')
-    end = json_data.get('end')
+        body = json_data.get('body')
+        acctID = json_data.get('acctID')
+        account_no = json_data.get('account_no')
+        start = json_data.get('start')
+        end = json_data.get('end')
 
-    url = '/advisor-partners-app-svc/restservices/customer/getDocDetails?customerId={}&startDate={}&endDate={}'.format(acctID,start,end)
+        url = '/advisor-partners-app-svc/restservices/customer/getDocDetails?customerId={}&startDate={}&endDate={}'.format(acctID,start,end)
 
-    response = send_api_request(url,body,source, acctID, account_no)
+        response = send_api_request(url,body,source, acctID, account_no)
 
-    return response
+        return response
 
     def doc_test(json_data):
+        account_no = json_data.get('account_no')
+        acctID = json_data.get('acctID')
+        start = json_data.get('start')
+        end = json_data.get('end')
+        body = json_data.get('body')
+        url = '/advisor-partners-app-svc/restservices/customer/downloadDoc'
 
-    account_no = json_data.get('account_no')
-    acctID = json_data.get('acctID')
-    start = json_data.get('start')
-    end = json_data.get('end')
-    body = json_data.get('body')
-    url = '/advisor-partners-app-svc/restservices/customer/downloadDoc'
+        response = send_api_request(url,body,source, acctID, account_no)
 
-    response = send_api_request(url,body,source, acctID, account_no)
-
-    return response
+        return response
 
 
     flag: bool
     status: str
 
     def checkResponse(testData, responseJson, responseStatus):
-    #print(testData)
-    compareCheck = CompareCheck()  # Instantiate the CompareCheck class using the = operator
-    if int(testData.get("response_status")) == responseStatus:
-        compareCheck.flag = True
-        compareCheck.status = "Response status matches expected {}\n".format(testData.get("response_status"))
-    else:
-        compareCheck.flag = False
-        compareCheck.status = "Response status does not match expected {}, got {}\n".format(testData.get("response_status"), responseStatus)  # Close the parentheses
-    return compareCheck
+        #print(testData)
+        compareCheck = CompareCheck()  # Instantiate the CompareCheck class using the = operator
+        if int(testData.get("response_status")) == responseStatus:
+            compareCheck.flag = True
+            compareCheck.status = "Response status matches expected {}\n".format(testData.get("response_status"))
+        else:
+            compareCheck.flag = False
+            compareCheck.status = "Response status does not match expected {}, got {}\n".format(testData.get("response_status"), responseStatus)  # Close the parentheses
+        return compareCheck
 
 def logThis(file, message):
     global logMessages
