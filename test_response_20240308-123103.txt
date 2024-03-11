@@ -1,0 +1,435 @@
+Running Tests for Next Capital API Tests
+Run Time 20240308-123103
+-------------------------------------------------------------------
+
+Running 27 Tests
+Base URL =  https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway 
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #1 
+Scenario : Bad account
+Test Type : account-status 
+ Test Data : {'scenario': 'Bad account', 'statusMessage': 'Exception calling cdp-plan-svc//plan/general-plan/dates/{accountNumber} for <TP040001  00005>.', 'type': 'account-status', 'account_no': 'TP040001%20%2000005', 'acctID': '85056962', 'response_status': '500', 'run': 'true', 'variableTests': [{'variable': 'statusMessage', 'expected': 'Exception calling cdp-plan-svc//plan/general-plan/dates/{accountNumber} for <TP040001  00005>.'}]}
+Variable Tests : 
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/account-status/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/85056962/TP040001%20%2000005
+Response Data : <Response [500]>Response Data : {
+  "message" : "Exception calling cdp-plan-svc//plan/general-plan/dates/{accountNumber} for <TP040001  00005>. Exception: <Error returned from p3 servlet with Error Code : 404 and message : Error occured in processing the request[{errorCode=2, errorMessage=Account Number is not valid : TP040001  00005}]>"
+}
+Response status matches expected 500
+Execution Time = 0.991685152053833 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #2 
+Scenario : Salesforce with no enrollment
+Test Type : account-status 
+ Test Data : {'scenario': 'Salesforce with no enrollment', 'statusMessage': 'No participant enrollment details were found for account number <TP040001  00001> and id <0030400000huO2VAAU>.', 'type': 'account-status', 'account_no': 'TP040001%20%2000001', 'acctID': '0030400000huO2VAAU', 'response_status': '400', 'run': 'true'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/account-status/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/0030400000huO2VAAU/TP040001%20%2000001
+Response Data : <Response [400]>Response Data : {
+  "message" : "No participant enrollment details were found for account number <TP040001  00001> and id <0030400000huO2VAAU>."
+}
+Response status matches expected 400
+Execution Time = 1.8068568706512451 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #3 
+Scenario : Salesforce with enrollment
+Test Type : account-status 
+ Test Data : {'scenario': 'Salesforce with enrollment', 'type': 'account-status', 'account_no': 'TP040001%20%2000001', 'acctID': '0030400000hgNkoAAE', 'response_status': '200', 'run': 'true'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/account-status/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/0030400000hgNkoAAE/TP040001%20%2000001
+Response Data : <Response [200]>Response Data : {
+  "accountNumber" : "TP040001  00001",
+  "customerId" : "85056962",
+  "status" : "PENDING_OPENING",
+  "statusModifiedDate" : "2024-02-28 18:06:16",
+  "statusMessage" : "Account is Pending",
+  "partEnrollId" : "99304367363803700"
+}
+Response status matches expected 200
+Execution Time = 3.1670918464660645 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #4 
+Scenario : Salesforce with enrollment
+Test Type : account-status 
+ Test Data : {'scenario': 'Salesforce with enrollment', 'type': 'account-status', 'account_no': 'TP040001%20%2000002', 'acctID': '0030400000hgNkoAAE', 'response_status': '200', 'run': 'true'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/account-status/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/0030400000hgNkoAAE/TP040001%20%2000002
+Response Data : <Response [200]>Response Data : {
+  "accountNumber" : "TP040001  00002",
+  "customerId" : "85056962",
+  "status" : "PENDING_OPENING",
+  "statusModifiedDate" : "2024-02-29 10:11:15",
+  "statusMessage" : "Account is Pending",
+  "partEnrollId" : "18650631249803700"
+}
+Response status matches expected 200
+Execution Time = 3.1737070083618164 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #5 
+Scenario : Salesforce with bad account
+Test Type : account-status 
+ Test Data : {'scenario': 'Salesforce with bad account', 'statusMessage': 'Exception calling cdp-plan-svc//plan/general-plan/dates/{accountNumber} for <TP040001  00005>.', 'type': 'account-status', 'account_no': 'TP040001%20%2000005', 'acctID': '0030400000hgNkoAAE', 'response_status': '500', 'run': 'true'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/account-status/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/0030400000hgNkoAAE/TP040001%20%2000005
+Response Data : <Response [500]>Response Data : {
+  "message" : "Exception calling cdp-plan-svc//plan/general-plan/dates/{accountNumber} for <TP040001  00005>. Exception: <Error returned from p3 servlet with Error Code : 404 and message : Error occured in processing the request[{errorCode=2, errorMessage=Account Number is not valid : TP040001  00005}]>"
+}
+Response status matches expected 500
+Execution Time = 0.8345448970794678 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #6 
+Scenario : CustomerId with enrollment
+Test Type : account-status 
+ Test Data : {'scenario': 'CustomerId with enrollment', 'type': 'account-status', 'account_no': 'TP040001%20%2000001', 'acctID': '85056962', 'response_status': '200', 'run': 'true'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/account-status/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/85056962/TP040001%20%2000001
+Response Data : <Response [200]>Response Data : {
+  "accountNumber" : "TP040001  00001",
+  "customerId" : "85056962",
+  "status" : "PENDING_OPENING",
+  "statusModifiedDate" : "2024-02-28 18:06:16",
+  "statusMessage" : "Account is Pending",
+  "partEnrollId" : "99304367363803700"
+}
+Response status matches expected 200
+Execution Time = 2.756150484085083 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #7 
+Scenario : CustomerId with enrollment
+Test Type : account-status 
+ Test Data : {'scenario': 'CustomerId with enrollment', 'type': 'account-status', 'account_no': 'TP040001%20%2000002', 'acctID': '85056962', 'response_status': '200', 'run': 'true'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/account-status/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/85056962/TP040001%20%2000002
+Response Data : <Response [200]>Response Data : {
+  "accountNumber" : "TP040001  00002",
+  "customerId" : "85056962",
+  "status" : "PENDING_OPENING",
+  "statusModifiedDate" : "2024-02-29 10:11:15",
+  "statusMessage" : "Account is Pending",
+  "partEnrollId" : "18650631249803700"
+}
+Response status matches expected 200
+Execution Time = 2.878770112991333 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #8 
+Scenario : CustomerId with bad account
+Test Type : account-status 
+ Test Data : {'scenario': 'CustomerId with bad account', 'statusMessage': 'Exception calling cdp-plan-svc//plan/general-plan/dates/{accountNumber} for <TP040001  00005>.', 'type': 'account-status', 'account_no': 'TP040001%20%2000005', 'acctID': '85056962', 'response_status': '400', 'run': 'true'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/account-status/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/85056962/TP040001%20%2000005
+Response Data : <Response [500]>Response Data : {
+  "message" : "Exception calling cdp-plan-svc//plan/general-plan/dates/{accountNumber} for <TP040001  00005>. Exception: <Error returned from p3 servlet with Error Code : 404 and message : Error occured in processing the request[{errorCode=2, errorMessage=Account Number is not valid : TP040001  00005}]>"
+}
+Response status does not match expected 400, got 500
+Execution Time = 0.9026186466217041 : 
+Test Result : Failed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #9 
+Scenario : PartEnrollId with enrollment
+Test Type : account-status 
+ Test Data : {'scenario': 'PartEnrollId with enrollment', 'type': 'account-status', 'account_no': 'TP040001%20%2000001', 'acctID': '99304367363803700', 'response_status': '200', 'run': 'true'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/account-status/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/99304367363803700/TP040001%20%2000001
+Response Data : <Response [200]>Response Data : {
+  "accountNumber" : "TP040001  00001",
+  "customerId" : "85056962",
+  "status" : "PENDING_OPENING",
+  "statusModifiedDate" : "2024-02-28 18:06:16",
+  "statusMessage" : "Account is Pending",
+  "partEnrollId" : "99304367363803700"
+}
+Response status matches expected 200
+Execution Time = 2.3484814167022705 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #10 
+Scenario : PartEnrollId with enrollment
+Test Type : account-status 
+ Test Data : {'scenario': 'PartEnrollId with enrollment', 'type': 'account-status', 'account_no': 'TP040001%20%2000002', 'acctID': '18650631249803700', 'response_status': '200', 'run': 'true'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/account-status/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/18650631249803700/TP040001%20%2000002
+Response Data : <Response [200]>Response Data : {
+  "accountNumber" : "TP040001  00002",
+  "customerId" : "85056962",
+  "status" : "PENDING_OPENING",
+  "statusModifiedDate" : "2024-02-29 10:11:15",
+  "statusMessage" : "Account is Pending",
+  "partEnrollId" : "18650631249803700"
+}
+Response status matches expected 200
+Execution Time = 2.4490835666656494 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #11 
+Scenario : PartEnrollId with bad account
+Test Type : account-status 
+ Test Data : {'scenario': 'PartEnrollId with bad account', 'statusMessage': 'No participant details were found for accountNo <TP040003  00002> and participantId <18650631249803700>.', 'type': 'account-status', 'account_no': 'TP040003%20%2000002', 'acctID': '18650631249803700', 'response_status': '400', 'run': 'true'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/account-status/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/18650631249803700/TP040003%20%2000002
+Response Data : <Response [400]>Response Data : {
+  "message" : "No participant details were found for the given account Number."
+}
+Response status matches expected 400
+Execution Time = 1.9504237174987793 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #12 
+Scenario : SalesforceId with enrollment but no CustomerId
+Test Type : account-status 
+ Test Data : {'scenario': 'SalesforceId with enrollment but no CustomerId', 'type': 'account-status', 'account_no': 'TP040003%20%2000001', 'acctID': '0030400000hgPVaAAM', 'response_status': '200', 'run': 'true'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/account-status/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/0030400000hgPVaAAM/TP040003%20%2000001
+Response Data : <Response [200]>Response Data : {
+  "accountNumber" : "TP040003  00001",
+  "customerId" : "85058793",
+  "status" : "PENDING_OPENING",
+  "statusModifiedDate" : "2024-02-28 15:54:15",
+  "statusMessage" : "Account is Pending",
+  "partEnrollId" : "44997244482803700"
+}
+Response status matches expected 200
+Execution Time = 2.695075750350952 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #13 
+Scenario : Bad SalesforceId
+Test Type : account-status 
+ Test Data : {'scenario': 'Bad SalesforceId', 'statusMessage': 'Exception calling salesforce-reference/customer by <0030400000hgNkoAAQ>. Exception: <null>', 'type': 'account-status', 'account_no': 'TP040001%20%2000001', 'acctID': '0030400000hgNkoAAQ', 'response_status': '500', 'run': 'true'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/account-status/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/0030400000hgNkoAAQ/TP040001%20%2000001
+Response Data : <Response [500]>Response Data : {
+  "message" : "Exception calling salesforce-reference/customer by <0030400000hgNkoAAQ>. Exception: <null>"
+}
+Response status matches expected 500
+Execution Time = 1.1137359142303467 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #14 
+Scenario : Bad CustomerId
+Test Type : account-status 
+ Test Data : {'scenario': 'Bad CustomerId', 'statusMessage': 'Unable to derive PartEnrollId for id <85056965>. Please use a valid CustomerId, SalesforceId, or PartEnrollId', 'type': 'account-status', 'account_no': 'TP040001%20%2000001', 'acctID': '85056965', 'response_status': '400', 'run': 'true'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/account-status/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/85056965/TP040001%20%2000001
+Response Data : <Response [400]>Response Data : {
+  "message" : "Unable to derive PartEnrollId for id <85056965>. Please use a valid CustomerId, SalesforceId, or PartEnrollId"
+}
+Response status matches expected 400
+Execution Time = 0.9085285663604736 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #15 
+Scenario : PartEnrollId and account with no match
+Test Type : account-status 
+ Test Data : {'scenario': 'PartEnrollId and account with no match', 'statusMessage': 'No participant details were found for accountNo <TP040001  00002> and participantId <28650631249803700>.', 'type': 'account-status', 'account_no': 'TP040001%20%2000001', 'acctID': '18650631249803700', 'response_status': '400', 'run': 'true'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/account-status/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/18650631249803700/TP040001%20%2000001
+Response Data : <Response [400]>Response Data : {
+  "message" : "No participant details were found for the given account Number."
+}
+Response status matches expected 400
+Execution Time = 1.863537073135376 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #16 
+Scenario : 
+Test Type : account-status 
+ Test Data : {'scenario': '', 'type': 'account-status', 'account_no': 'TP040001%20%2000002', 'acctID': '0030400000hdTauAAE', 'response_status': '200', 'run': 'true'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/account-status/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/0030400000hdTauAAE/TP040001%20%2000002
+Response Data : <Response [200]>Response Data : {
+  "accountNumber" : "TP040001  00002",
+  "customerId" : "85055301",
+  "status" : "OPEN",
+  "statusModifiedDate" : "2024-02-19 22:37:27",
+  "statusMessage" : "Account is Opened",
+  "partEnrollId" : "85095974057003700"
+}
+Response status matches expected 200
+Execution Time = 2.9667956829071045 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #17 
+Scenario : 
+Test Type : account-status 
+ Test Data : {'type': 'account-status', 'scenario': '', 'account_no': 'TP040001%20%2000002', 'acctID': '0030400000hdTauAAE', 'response_status': '200', 'run': 'true'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/account-status/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/0030400000hdTauAAE/TP040001%20%2000002
+Response Data : <Response [200]>Response Data : {
+  "accountNumber" : "TP040001  00002",
+  "customerId" : "85055301",
+  "status" : "OPEN",
+  "statusModifiedDate" : "2024-02-19 22:37:27",
+  "statusMessage" : "Account is Opened",
+  "partEnrollId" : "85095974057003700"
+}
+Response status matches expected 200
+Execution Time = 2.9975764751434326 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #18 
+Scenario : 
+Test Type : account-performance 
+ Test Data : {'type': 'account-performance', 'scenario': '', 'account_no': 'TP040001%20%2000002', 'acctID': '0030400000hdTauAAE', 'start': '2019-01-01', 'end': '2019-12-31', 'response_status': '404', 'run': 'true'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/account-performance/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/0030400000hdTauAAE/TP040001%20%2000002/2019-01-01/2019-12-31
+Response Data : <Response [404]>Response Data : {
+  "message" : "Request could not be processed. Participant: 0030400000hdTauAAE (partEnrollId) is not enrolled in plan TP040001  00002 ."
+}
+Response status matches expected 404
+Execution Time = 1.5564370155334473 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #19 
+Scenario : comments here
+Test Type : transaction-status 
+ Test Data : {'type': 'transaction-status', 'account_no': 'TP040001%20%2000002', 'acctID': '0030400000hdTauAAE', 'requestID': 'ABCD', 'body': [{'requestId': 'ABCD', 'transactionType': 'realignments'}], 'response_status': '200', 'run': 'true', 'scenario': 'comments here'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/transaction-status
+Response Data : <Response [404]>Response Data : {
+  "timestamp" : "2024-03-08T17:31:41.387+00:00",
+  "status" : 404,
+  "error" : "Not Found",
+  "path" : "/advisor-partners-app-svc/restservices/participant/transaction-status"
+}
+Response status does not match expected 200, got 404
+Execution Time = 0.5651991367340088 : 
+Test Result : Failed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #20 
+Scenario : 
+Test Type : future-allocation 
+ Test Data : {'type': 'future-allocation', 'account_no': 'TP040000SM  00001', 'scenario': '', 'acctID': '4343452342922700', 'body': {'is_point_in_time_advice': True, 'investments': {'transaction': [{'fund_desc_code': 'abc', 'allocation_percent': '100'}]}, 'requestId': 'XXddfaX'}, 'response_status': '404', 'run': 'true'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/future-allocation/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/4343452342922700/TP040000SM  00001
+Response Data : <Response [404]>Response Data : {
+  "timestamp" : "2024-03-08T17:31:41.774+00:00",
+  "status" : 404,
+  "error" : "Not Found",
+  "path" : "/advisor-partners-app-svc/restservices/participant/future-allocation/TRANSAMERICA%20PERSONALIZED%20PORTFOLIOS%20IRA/4343452342922700/TP040000SM%20%2000001"
+}
+Response status matches expected 404
+Execution Time = 0.37841153144836426 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #21 
+Scenario : Bad Alloction Percentage
+Test Type : realignments 
+ Test Data : {'type': 'realignments', 'scenario': 'Bad Alloction Percentage', 'account_no': 'TP040000SM  00001', 'acctID': '4343452342922700', 'response_status': '422', 'requestID': 'realignmentRequest', 'body': {'investments': {'transaction': [{'fund_desc_code': 'IR33', 'allocation_percent': 99}]}, 'requestId': 'realignmentRequest'}, 'run': 'true'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/realignments/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/4343452342922700/TP040000SM  00001
+Response Data : <Response [400]>Response Data : {
+  "message" : "Allocation change request of 99 could not be processed. Allocation percentages must always equal to 100%"
+}
+Response status does not match expected 422, got 400
+Execution Time = 4.865765810012817 : 
+Test Result : Failed
+-------------------------------------------------------------------
+
+
+
+Test Case # 21 Skipped 
+-------------------------------------------------------------------
+
+
+
+Test Case # 21 Skipped 
+-------------------------------------------------------------------
+
+
+
+Test Case # 21 Skipped 
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #22 
+Scenario : 
+Test Type : doc 
+ Test Data : {'type': 'doc', 'scenario': '', 'account_no': 'TP040001  00001', 'acctID': '57293105238303700', 'response_status': '400', 'run': 'true', 'body': 'CustomerDocListResponse(confirms=[], statements=[], status=Success, message=)CustomerDocListResponse(confirms=[], statements=[], status=Success, message=)'}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/customer/downloadDoc
+Response Data : <Response [400]>Status code return : 400
+Response status matches expected 400
+Execution Time = 0.4680614471435547 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #23 
+Scenario : 
+Test Type : doc 
+ Test Data : {'type': 'doc', 'scenario': '', 'account_no': 'TP040001  00001', 'acctID': '56981412656013140', 'response_status': '200', 'run': 'true', 'body': {'statementDoc': {'stmtRunTypC': 2, 'erEntGrpI': 56981412656013140, 'stmtEndDt': '2024-02-29', 'org1Nm': 'IRA Statement', 'org2Nm': '', 'langCd': '00', 'stmtI': 36147991940903700, 'creationTs': '2019-06-25T00:18:49', 'accountNo': 'TP040001  00001', 'partEnrlI': 57293105238303700, 'personI': 93758005238303700}}}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/customer/downloadDoc
+Response Data : <Response [200]>Status code return : 200
+Response status matches expected 200
+Execution Time = 2.307253122329712 : 
+Test Result :  Passed
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Running testing case #24 
+Scenario : Good realignments
+Test Type : realignments 
+ Test Data : {'type': 'realignments', 'scenario': 'Good realignments', 'accountID': '67164947003700', 'account_no': 'TP040001 00001', 'response_status': '422', 'run': 'true', 'body': {'investments': {'transaction': [{'fund_desc_code': 'IR33', 'allocation_percent': 100}]}, 'requestId': 'PT6'}}
+Request URL : https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway/advisor-partners-app-svc/restservices/participant/realignments/TRANSAMERICA PERSONALIZED PORTFOLIOS IRA/None/TP040001 00001
+Response Data : <Response [500]>Response Data : {
+  "message" : "Internal server error"
+}
+Response status does not match expected 422, got 500
+Execution Time = 1.797384262084961 : 
+Test Result : Failed
+-------------------------------------------------------------------
+
+
+
+ 24 Tests with 4 Errors, 14.81% Failure Rate Skipped 3 -------------------------------------------------------------------
+

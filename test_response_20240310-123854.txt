@@ -1,0 +1,8 @@
+Running Tests for Next Capital API Tests
+Run Time 20240310-123854
+-------------------------------------------------------------------
+
+Running 27 Tests
+Base URL =  https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway 
+-------------------------------------------------------------------
+

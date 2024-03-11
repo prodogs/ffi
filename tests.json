@@ -1,0 +1,298 @@
+{
+"baseURL": "https://api.shared-tst.tanonprod.aegon.io/platform-api-gateway",
+"testName" : "Next Capital API Tests",
+"tests" : [
+  {
+    "scenario": "Bad account",
+    "statusMessage": "Exception calling cdp-plan-svc//plan/general-plan/dates/{accountNumber} for <TP040001  00005>.",
+    "type": "account-status",
+    "account_no" : "TP040001%20%2000005",
+    "acctID" : "85056962",
+    "response_status" :  "500",
+    "run" :  "true", 
+    "variableTests" : [
+      {
+        "variable" : "statusMessage",
+        "expected" : "Exception calling cdp-plan-svc//plan/general-plan/dates/{accountNumber} for <TP040001  00005>."
+      }
+    ]
+    },
+{
+    "scenario": "Salesforce with no enrollment"        ,
+    "statusMessage": "No participant enrollment details were found for account number <TP040001  00001> and id <0030400000huO2VAAU>.",
+    "type": "account-status",
+    "account_no" : "TP040001%20%2000001",
+    "acctID" : "0030400000huO2VAAU",
+    "response_status" :  "400",
+    "run" :  "true"
+},
+{
+    "scenario": "Salesforce with enrollment",
+    "type": "account-status",
+    "account_no" : "TP040001%20%2000001",
+    "acctID" : "0030400000hgNkoAAE",
+    "response_status" :  "200",
+    "run" :  "true"
+},
+{
+    "scenario": "Salesforce with enrollment",
+    "type": "account-status",
+    "account_no" : "TP040001%20%2000002",
+    "acctID" : "0030400000hgNkoAAE",
+    "response_status" :  "200",
+    "run" :  "true"
+},
+{
+    "scenario": "Salesforce with bad account",
+    "statusMessage": "Exception calling cdp-plan-svc//plan/general-plan/dates/{accountNumber} for <TP040001  00005>.",
+    "type": "account-status",
+    "account_no" : "TP040001%20%2000005",
+    "acctID" : "0030400000hgNkoAAE",
+    "response_status" :  "500",
+    "run" :  "true"
+},
+{
+    "scenario": "CustomerId with enrollment",
+    "type": "account-status",
+    "account_no" : "TP040001%20%2000001",
+    "acctID" : "85056962",
+    "response_status" :  "200",
+    "run" :  "true"
+},
+{
+    "scenario": "CustomerId with enrollment",
+    "type": "account-status",
+    "account_no" : "TP040001%20%2000002",
+    "acctID" : "85056962",
+    "response_status" :  "200",
+    "run" :  "true"
+},
+{
+    "scenario": "CustomerId with bad account",
+    "statusMessage": "Exception calling cdp-plan-svc//plan/general-plan/dates/{accountNumber} for <TP040001  00005>.",
+    "type": "account-status",
+    "account_no" : "TP040001%20%2000005",
+    "acctID" : "85056962",
+    "response_status" :  "400",
+    "run" :  "true"
+},
+{
+    "scenario": "PartEnrollId with enrollment",
+    "type": "account-status",
+    "account_no" : "TP040001%20%2000001",
+    "acctID" : "99304367363803700",
+    "response_status" :  "200",
+    "run" :  "true"
+},
+{
+    "scenario": "PartEnrollId with enrollment",
+    "type": "account-status",
+    "account_no" : "TP040001%20%2000002",
+    "acctID" : "18650631249803700",
+    "response_status" :  "200",
+    "run" :  "true"
+},
+{
+    "scenario": "PartEnrollId with bad account",
+    "statusMessage": "No participant details were found for accountNo <TP040003  00002> and participantId <18650631249803700>.",
+    "type": "account-status",
+    "account_no" : "TP040003%20%2000002",
+    "acctID" : "18650631249803700",
+    "response_status" :  "400",
+    "run" :  "true"
+},
+{
+    "scenario": "SalesforceId with enrollment but no CustomerId",
+    "type": "account-status",
+    "account_no" : "TP040003%20%2000001",
+    "acctID" : "0030400000hgPVaAAM",
+    "response_status" :  "200",
+    "run" :  "true"
+},
+{
+    "scenario": "Bad SalesforceId",
+    "statusMessage": "Exception calling salesforce-reference/customer by <0030400000hgNkoAAQ>. Exception: <null>",
+    "type": "account-status",
+    "account_no" : "TP040001%20%2000001",
+    "acctID" : "0030400000hgNkoAAQ",
+    "response_status" :  "500",
+    "run" :  "true"
+},
+{
+    "scenario": "Bad CustomerId",
+    "statusMessage": "Unable to derive PartEnrollId for id <85056965>. Please use a valid CustomerId, SalesforceId, or PartEnrollId",
+    "type": "account-status",
+    "account_no" : "TP040001%20%2000001",
+    "acctID" : "85056965",
+    "response_status" :  "400",
+    "run" :  "true"
+},
+{
+    "scenario": "PartEnrollId and account with no match",
+    "statusMessage": "No participant details were found for accountNo <TP040001  00002> and participantId <28650631249803700>.",
+    "type": "account-status",
+    "account_no" : "TP040001%20%2000001",
+    "acctID" : "18650631249803700",
+    "response_status" :  "400",
+    "run" :  "true"
+},
+  {
+    "scenario": "",
+    "type": "account-status",
+    "account_no" : "TP040001%20%2000002",
+    "acctID" : "0030400000hdTauAAE",
+    "response_status" :  "200",
+    "run" :  "true"
+},
+{
+    "type": "account-status",
+    "scenario": "",
+    "account_no" : "TP040001%20%2000002",
+    "acctID" : "0030400000hdTauAAE",
+    "response_status" :  "200",
+    "run" :  "true"
+},
+{
+    "type": "account-performance",
+    "scenario": "",
+    "account_no" : "TP040001%20%2000002",
+    "acctID" : "0030400000hdTauAAE",
+    "start" : "2019-01-01",
+    "end" : "2019-12-31",
+    "response_status" :  "404",     "run" :  "true"
+},
+{
+    "type": "transaction-status",
+    "account_no" : "TP040001%20%2000002",
+    "acctID" : "0030400000hdTauAAE",
+    "requestID" : "ABCD",
+    "body" : [ { "requestId": "ABCD", "transactionType" : "realignments" }],
+    "response_status" :  "200",
+     "run" :  "true",
+     "scenario" : "comments here"
+},
+{
+    "type": "future-allocation",
+    "account_no" : "TP040000SM  00001",
+    "scenario": "",
+    "acctID" : "4343452342922700",
+    "body" : {
+        "is_point_in_time_advice": true,
+        "investments": {
+          "transaction": [
+            {
+              "fund_desc_code": "abc",
+              "allocation_percent": "100"
+            }
+          ]
+        },
+        "requestId": "XXddfaX"
+      },
+    "response_status" :  "404",     "run" :  "true"
+},
+{
+    "type": "realignments",
+    "scenario": "Bad Alloction Percentage",
+    "account_no" : "TP040000SM  00001",
+    "acctID" : "4343452342922700",
+    "response_status" :  "422",
+    "requestID" : "realignmentRequest",
+    "body" :{
+        "investments": {
+          "transaction": [
+            {
+              "fund_desc_code": "IR33",
+              "allocation_percent": 99
+            }
+          ]
+        },
+        "requestId":"realignmentRequest"
+      },     "run" :  "true"
+},
+{
+    "type": "doc-list",
+    "scenario": "",
+    "account_no" : "TP040001%20%2000002",
+    "acctID" : "0030400000hdTauAAE",
+    "start" : "2019-01-01",
+    "end" : "2019-12-31",
+    "response_status" :  "500",
+    "run" :  "false"
+},
+{
+    "type": "doc-list",
+    "scenario": "",
+    "account_no" : "TP040001%20%2000002",
+    "acctID" : "85056815",
+    "start" : "2023-02-27",
+    "end" : "2024-02-27",
+    "response_status" :  "200",
+    "run" :  "false"
+},
+{
+    "type": "doc-list",
+    "scenario": "",
+    "account_no" : "TP040001%20%2000002",
+    "acctID" : "85056815",
+    "start" : "2022-01-01",
+    "end" : "2024-03-05",
+    "response_status" :  "200",
+    "run" :  "false"
+},
+{
+    "type": "doc",
+    "scenario": "",
+    "account_no" : "TP040001  00001",
+    "acctID" : "57293105238303700",
+    "response_status" :  "400",
+    "run" :  "true",
+    "body": "CustomerDocListResponse(confirms=[], statements=[], status=Success, message=)CustomerDocListResponse(confirms=[], statements=[], status=Success, message=)"
+},
+{
+    "type": "doc",
+    "scenario": "",
+    "account_no" : "TP040001  00001",
+    "acctID" : "56981412656013140",
+    "response_status" :  "200",
+    "run" :  "true",
+    "body": 
+    {
+      "statementDoc": {
+          "stmtRunTypC": 2,
+          "erEntGrpI": 56981412656013140,
+          "stmtEndDt": "2024-02-29",
+          "org1Nm": "IRA Statement",
+          "org2Nm": "",
+          "langCd": "00",
+          "stmtI": 36147991940903700,
+          "creationTs": "2019-06-25T00:18:49",
+          "accountNo": "TP040001  00001",
+          "partEnrlI": 57293105238303700,
+          "personI": 93758005238303700
+        }
+    }
+    },
+    {
+      "type" : "realignments",
+      "scenario" : "Good realignments",
+      "accountID" :  "67164947003700",
+      "account_no" : "TP040001 00001",
+      "response_status" : "422",
+      "run" : "true",
+      "body": {
+        "investments": {
+          "transaction": [
+            {
+              "fund_desc_code": "IR33",
+              "allocation_percent": 100
+            }
+          ]
+        },
+        "requestId": "PT6"
+      }
+  
+    }
+    
+
+]
+}
