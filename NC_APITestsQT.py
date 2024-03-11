@@ -340,6 +340,73 @@ class apiTestRunner():
             compareCheck.status = "Response status does not match expected {}, got {}\n".format(testData.get("response_status"), responseStatus)  # Close the parentheses
         return compareCheck
 
+
+class UIAPIRunOutput(APIRunOutput):
+    def __init__(self):
+        super().__init__()
+
+    def showTestResults(self, message):
+        global testResultsText
+        super().showTestResults(message)
+        testResultsText.config(text=message)
+
+    def logThis(self, file, message):
+        global logMessages
+        global responseFileText
+        super().logThis(file, message)
+        responseFileText.insertPlainText(logMessages + "\n")
+        responseFileText.moveCursor(QtGui.QTextCursor.End)
+
+    def setScenarioText(scenarioText):
+        global scenario
+        scenario.setText(scenarioText)
+
+    def setStatusMessage(status):
+        global statusLabel
+        statusLabel.setText(f"Status : {status}")
+
+    def setErrors(errors):
+        global errorsLabel
+        errorsLabel.setText(f"Errors : {errors}")
+
+    def setNumberOfTests(tests):
+        global numberOfTests
+        numberOfTests.setText(f"Number of Tests : {tests}")
+
+    def setSkipped(skipped):
+        global skippedLabel
+        skippedLabel.setText(f"Skipped : {skipped}")
+
+
+class APIRunOutput():
+    def __init__(self):
+        super().__init__()
+
+    def setNumberOfTests(tests):
+        None
+
+    def setErrors(errors):
+        None
+    def setSkipped(skipped):
+        None
+
+    def setScenarioText(scenarioText):
+        None
+
+    def setProgress(progress):
+        global progress_bar
+        progress_bar.setValue(progress)
+
+    def showTestResults(message):
+        responseFileText.insertPlainText(message + "\n")
+        responseFileText.moveCursor(QtGui.QTextCursor.End)
+        
+    def setStatusMessage(status):
+        None
+
+    def setProgress(progress):
+        None
+
 def logThis(file, message):
     global logMessages
     global runUI, responseFileText
